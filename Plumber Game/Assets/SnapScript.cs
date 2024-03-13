@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SnapScript : PipeConnectionManager
+public class SnapScript : MonoBehaviour
 {
     public bool Iscorutine = false;
     public GameObject filled;
@@ -10,10 +10,15 @@ public class SnapScript : PipeConnectionManager
     [SerializeField]
     //private int totalPipes;
     private int connectedCount;
+    private int InitialCount;
 
     // Start is called before the first frame update
     void Start()
     {
+        GlobalClass.DetectionCount = connectedCount;
+        InitialCount = FindFirstObjectByType<PipeConnectionManager>().totalPipes;
+        Debug.Log("num of count start" + connectedCount);
+        Debug.Log("num of count tottalpipes" + InitialCount);
 
         //connectedCount = totalPipes;
 
@@ -31,57 +36,59 @@ public class SnapScript : PipeConnectionManager
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Snap")&& !Iscorutine)
+        if (collision.gameObject.CompareTag("Snap"))
         {
-            Iscorutine = true;
-            filled.SetActive(true);
+            
             Debug.Log("snapeddd");
-            TileCollider[] pipes = FindObjectsOfType<TileCollider>();
-            foreach (TileCollider Pipe in pipes)
+            GlobalClass.DetectionCount++;
+            if (GlobalClass.DetectionCount == InitialCount)
             {
-                connectedCount++;
-                Debug.Log("count" + connectedCount);
-                //if (Pipe.isConnected)
-                //{
-
-                   
-                //    Debug.Log("count" + connectedCount);
-                //}
-              
+                Debug.Log("GameWOn");
 
             }
+
+            Debug.Log("count num" + GlobalClass.DetectionCount);
+
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Snap"))
+        {
+
+            Debug.Log("snapeddd");
+            GlobalClass.DetectionCount--;
             
-            //Debug.Log("countnum" + connectedCount);
-            //if (connectedCount == totalPipes)
-            //{
-            //    Debug.Log("Game Won!");
-            //    // Handle game won logic here.
-            //}
 
-            //CheckPipes();
-            //TileCollider[] t = FindObjectsOfType<TileCollider>();
-            //foreach(TileCollider T in t)
-            //{
-            //    T.isConnected = true;
-            //    if (T.isConnected)
-            //    {
-            //        StartCoroutine(CheckGameStatus());
-            //    }
+            Debug.Log("count num  22 " + GlobalClass.DetectionCount);
 
-            //}
-
-
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Snap"))
+        {
+            
+            filled.SetActive(true);
+           
 
         }
         else
         {
+
             filled.SetActive(false);
         }
     }
 
-    public IEnumerator CheckGameStatus()
+
+    public void CheckWOn()
     {
         
+    }
+
+    public IEnumerator CheckGameStatus()
+    {
+
 
         while (false)
         {
@@ -111,17 +118,13 @@ public class SnapScript : PipeConnectionManager
             }
 
 
-            if (connectedCount == totalPipes)
+            if (connectedCount == InitialCount)
             {
                 Debug.Log("Game Won!");
                 // Handle game won logic here.
             }
         }
 
-        //if (connectedCount == totalPipes)
-        //{
-        //    Debug.Log("Game Won!");
-        //    // Handle game won logic here.
-        //}
+       
     }
 }

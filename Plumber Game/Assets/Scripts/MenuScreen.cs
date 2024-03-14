@@ -25,7 +25,7 @@ public class MenuScreen : Screenbase
        
         if (_button.name == "PLAYBTN")
         {
-            //GamePlayScreen._instance.InitScreen();
+     
             ExitScreen();
             SceneManager.LoadScene("MenuScene");
             Debug.Log("playWorked");

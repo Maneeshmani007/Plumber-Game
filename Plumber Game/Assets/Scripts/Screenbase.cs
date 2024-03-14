@@ -20,7 +20,7 @@ public class Screenbase : MonoBehaviour
     {
         if (Updated)
         {
-            baseObj.SetActive(false);
+            //baseObj.SetActive(false);
             Debug.Log("starterd");
         }
     }

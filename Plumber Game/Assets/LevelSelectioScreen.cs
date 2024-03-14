@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class LevelSelectioScreen : Screenbase
 {
-
+    public static LevelSelectioScreen INSTANCE;
     public GameObject baseOb1;
     // Start is called before the first frame update
     void Start()
@@ -27,20 +27,24 @@ public class LevelSelectioScreen : Screenbase
         {
             //GamePlayScreen._instance.InitScreen();
             ExitScreen();
-            SceneManager.LoadScene("");
+            SceneManager.LoadScene("GamePlayScene");
+            GamePlayScreen._instance.InitScreen();
+            
             
 
         }
         else if (_button.name == "PLAYBTN (1)")
         {
             ExitScreen();
-            SceneManager.LoadScene("");
+            SceneManager.LoadScene("GamePlayScene 1");
+            GamePlayScreen._instance.InitScreen();
         }
         else if (_button.name == "PLAYBTN (2)")
         {
 
             ExitScreen();
-            SceneManager.LoadScene("");
+            SceneManager.LoadScene("GamePlayScene 2");
+            GamePlayScreen._instance.InitScreen();
         }
 
 

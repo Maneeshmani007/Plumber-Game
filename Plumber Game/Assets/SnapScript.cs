@@ -16,7 +16,7 @@ public class SnapScript : MonoBehaviour
     void Start()
     {
         GlobalClass.DetectionCount = connectedCount;
-        InitialCount = FindFirstObjectByType<PipeConnectionManager>().totalPipes;
+        
         Debug.Log("num of count start" + connectedCount);
         Debug.Log("num of count tottalpipes" + InitialCount);
 

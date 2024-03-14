@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GlobalClass : MonoBehaviour
 {
+
+    public static int DetectionCount;
     // Start is called before the first frame update
     void Start()
     {
